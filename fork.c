@@ -1,0 +1,35 @@
+#include <stdio.h> 
+#include<stdlib.h> 
+#include<unistd.h> 
+#include<sys/types.h>
+#include<sys/wait.h>
+int main()
+{
+pid_t pid; int x =5,i; 
+pid = fork();
+x++;
+if (pid < 0)
+    {
+        printf("Process creation error"); 
+        exit(-1);
+    }
+
+else if(pid>0)
+    {
+        wait(NULL);
+        printf ("\nParent starts\nEven Nos: "); 
+        for(i=2;i<=10;i+=2)
+        printf ("%3d",i); 
+        printf("\nParent ends\n");
+    }
+
+else if (pid == 0)
+    {
+        printf ("Child starts\nOdd Nos: "); 
+        for(i=1;i<10;i+=2)
+        printf ("%3d",i); 
+        printf("\nChild ends\n");
+    }
+
+return 0;
+}
